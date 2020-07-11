@@ -3,6 +3,11 @@ import { AppModule } from './app.module';
 import { SwaggerModule, DocumentBuilder } from "@nestjs/swagger";
 import { NoteModule } from "../src/modules/note.module";
 
+
+dotenv.config();
+
+const PORT = process.env.PORT || 3000;
+
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.setGlobalPrefix("api/v1");
@@ -19,6 +24,6 @@ async function bootstrap() {
     include: [NoteModule]
   });
   SwaggerModule.setup("api", app, appDocument);
-  await app.listen(3000);
+  await app.listen(PORT);
 }
 bootstrap();
